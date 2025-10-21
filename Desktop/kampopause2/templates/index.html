@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 英雄區域 -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    {{ shop.name }}
+                    <br>
+                    <small class="fs-3">{{ shop.english_name }}</small>
+                </h1>
+                <p class="lead mb-4">{{ shop.description }}</p>
+                
+                <div class="price-tag mb-4">
+                    <h2 class="text-primary">
+                        <i class="fas fa-tag me-2"></i>
+                        每位 {{ shop.price }} 元 / {{ shop.duration }}
+                    </h2>
+                    <p class="text-muted">冷氣開放 • 自由進出</p>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#features" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-info-circle me-2"></i>了解更多
+                    </a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-phone me-2"></i>立即預約
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="rest-area-preview">
+                    <i class="fas fa-chair display-1 text-primary mb-3"></i>
+                    <h3>舒適卡位</h3>
+                    <p class="text-muted">專屬個人空間</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 特色服務 -->
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">我們的服務</h2>
+                <p class="lead">為您提供最完善的休息體驗</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for feature in shop.features %}
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <i class="fas fa-check-circle text-primary fa-2x mb-3"></i>
+                    <h5>{{ feature }}</h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 使用情境 -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">適合情境</h2>
+                <p class="lead">多元化的使用需求，我們都能滿足</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for scenario in shop.usage_scenarios %}
+            <div class="col-lg-6">
+                <div class="scenario-card p-4 h-100">
+                    <i class="fas fa-star text-warning me-3"></i>
+                    <span>{{ scenario }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 價格資訊 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="pricing-card p-5 bg-primary text-white rounded-3 mb-5">
+                    <h2 class="display-6 fw-bold mb-3">個人收費標準</h2>
+                    <div class="price display-1 fw-bold mb-3">${{ shop.price }}</div>
+                    <h4 class="mb-4">每人 • {{ shop.duration }}</h4>
+                    <p class="lead mb-4">提供舒適的卡位座位和圓形櫈，讓您專心休息或工作</p>
+                    <div class="benefits">
+                        <div class="row">
+                            <div class="col-md-6 text-start">
+                                <p><i class="fas fa-wifi me-2"></i>高速Wi-Fi</p>
+                                <p><i class="fas fa-snowflake me-2"></i>冷氣開放</p>
+                                <p><i class="fas fa-plug me-2"></i>充電插座</p>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <p><i class="fas fa-chair me-2"></i>卡位座位</p>
+                                <p><i class="fas fa-mug-hot me-2"></i>圓形櫈</p>
+                                <p><i class="fas fa-shield-alt me-2"></i>安全環境</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 全場租用價格 -->
+                <div class="pricing-card p-5 bg-warning text-dark rounded-3">
+                    <h2 class="display-6 fw-bold mb-3">全場租用服務</h2>
+                    <div class="price display-1 fw-bold mb-3">${{ shop.whole_rental_price }}</div>
+                    <h4 class="mb-4">每小時 • 專屬私人空間</h4>
+                    <p class="lead mb-4">適合團體會議、聚會活動、私人派對</p>
+                    <div class="rental-info">
+                        <p><i class="fas fa-clock me-2"></i>租用時段：{{ shop.whole_rental_hours }}</p>
+                        <p><i class="fas fa-users me-2"></i>容納人數：10-15人</p>
+                        <p><i class="fas fa-check-circle me-2"></i>包含所有設施使用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 營業時間 -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h2 class="section-title mb-4">營業時間</h2>
+                <div class="business-hours-card p-4 bg-white rounded-3">
+                    {% for day, hours in shop.hours.items() %}
+                    <div class="time-slot mb-3">
+                        <h4 class="text-primary">{{ day }}</h4>
+                        <h3 class="fw-bold">{{ hours }}</h3>
+                    </div>
+                    {% endfor %}
+                    <p class="text-muted mt-3">中午時段到傍晚為個人服務，晚上時段開放全場租用</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 text-center mb-5">聯絡我們</h1>
+
+            <div class="row">
+                <!-- 左側：店家資訊 -->
+                <div class="col-md-5 mb-4">
+                    <div class="contact-info">
+                        <h3 class="mb-4"><i class="fas fa-info-circle me-2"></i>店家資訊</h3>
+                        
+                        <div class="info-item mb-3">
+                            <h5><i class="fas fa-store me-2"></i>店名</h5>
+                            <p>{{ shop.name }} ({{ shop.english_name }})</p>
+                        </div>
+
+                        <div class="info-item mb-3">
+                            <h5><i class="fas fa-tag me-2"></i>個人收費</h5>
+                            <p>每位 {{ shop.price }} 元 / {{ shop.duration }}</p>
+                        </div>
+
+                        <div class="info-item mb-3">
+                            <h5><i class="fas fa-building me-2"></i>全場租用</h5>
+                            <p class="fw-bold">{{ shop.whole_rental_price }} 元 / 每小時</p>
+                            <p class="text-muted">時段：{{ shop.whole_rental_hours }}</p>
+                        </div>
+
+                        <div class="info-item mb-3">
+                            <h5><i class="fas fa-clock me-2"></i>營業時間</h5>
+                            {% for day, hours in shop.hours.items() %}
+                            <p class="mb-1"><strong>{{ day }}:</strong> {{ hours }}</p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="info-item">
+                            <h5><i class="fas fa-phone me-2"></i>聯絡電話</h5>
+                            <p class="fs-5 fw-bold text-primary">{{ shop.telephone }}</p>
+                        </div>
+
+                        <div class="info-item mt-4">
+                            <h5><i class="fas fa-chair me-2"></i>座位類型</h5>
+                            <p class="mb-1">• 卡位座位</p>
+                            <p class="mb-0">• 圓形櫈</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：聯絡表單 -->
+                <div class="col-md-7">
+                    <div class="contact-form-card">
+                        <h3 class="mb-4"><i class="fas fa-envelope me-2"></i>傳送訊息</h3>
+                        <p class="text-muted mb-4">填寫以下表格，我們會透過電郵回覆您</p>
+                        
+                        <form method="POST" id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">姓名 *</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">聯絡電話 *</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">電子郵件 *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">服務類型 *</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service_type" id="service1" value="個人休息（$25/1.5小時）" required>
+                                    <label class="form-check-label" for="service1">個人休息（$25/1.5小時）</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service_type" id="service2" value="全場租用洽詢（$500/小時）">
+                                    <label class="form-check-label" for="service2">全場租用洽詢（$500/小時）</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="service_type" id="service3" value="一般詢問">
+                                    <label class="form-check-label" for="service3">一般詢問</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="booking_date" class="form-label">預約日期（如需要）</label>
+                                <input type="date" class="form-control" id="booking_date" name="booking_date">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="form-label">訊息內容 *</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required 
+                                          placeholder="請詳細說明您的需求，我們會透過電郵回覆您..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-paper-plane me-2"></i>傳送訊息
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

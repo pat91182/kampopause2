@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 text-center mb-5">關於 {{ shop.name }}</h1>
+            
+            <div class="about-content">
+                <p class="lead text-center mb-5">
+                    {{ shop.description }}
+                </p>
+
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <h3><i class="fas fa-bullseye text-primary me-2"></i>我們的理念</h3>
+                        <p>在快節奏的都市生活中，提供一個讓身心得以休息的寧靜空間。我們相信，適當的休息是為了走更長遠的路。</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3><i class="fas fa-heart text-primary me-2"></i>空間特色</h3>
+                        <p>提供獨立的卡位座位和舒適的圓形櫈，讓每位顧客都能享有個人空間，專心休息或工作。</p>
+                    </div>
+                </div>
+
+                <!-- 使用情境 -->
+                <div class="scenarios-section mb-5">
+                    <h3 class="text-center mb-4"><i class="fas fa-lightbulb text-warning me-2"></i>適合使用情境</h3>
+                    <div class="row">
+                        {% for scenario in shop.usage_scenarios %}
+                        <div class="col-md-12 mb-3">
+                            <div class="scenario-item p-3 bg-light rounded">
+                                <i class="fas fa-check text-success me-2"></i>
+                                {{ scenario }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="business-hours bg-light p-4 rounded-3 mb-5">
+                    <h3 class="text-center mb-4">營業時間</h3>
+                    <div class="row text-center">
+                        {% for day, hours in shop.hours.items() %}
+                        <div class="col-12 mb-3">
+                            <strong>{{ day }}</strong>
+                            <br>
+                            <span class="text-primary fs-4">{{ hours }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- 價格資訊 -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="pricing-info text-center p-4 bg-primary text-white rounded-3 h-100">
+                            <h3 class="mb-3">個人收費</h3>
+                            <h2 class="display-4 fw-bold mb-2">${{ shop.price }}</h2>
+                            <h4 class="mb-3">每人 / {{ shop.duration }}</h4>
+                            <p class="mb-0">包含所有設施使用</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="pricing-info text-center p-4 bg-warning text-dark rounded-3 h-100">
+                            <h3 class="mb-3">全場租用</h3>
+                            <h2 class="display-4 fw-bold mb-2">${{ shop.whole_rental_price }}</h2>
+                            <h4 class="mb-3">每小時</h4>
+                            <p class="mb-0">{{ shop.whole_rental_hours }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

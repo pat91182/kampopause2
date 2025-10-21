@@ -1,0 +1,114 @@
+:root {
+    --primary-color: #2c5aa0;
+    --secondary-color: #f8f9fa;
+    --accent-color: #ff6b35;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    padding-top: 76px;
+}
+
+/* 導航欄 */
+.navbar {
+    background: rgba(44, 90, 160, 0.95) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* 聯絡表單卡片 */
+.contact-form-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.contact-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+    height: fit-content;
+}
+
+/* 表單樣式 */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: #1e3a8a;
+    border-color: #1e3a8a;
+}
+
+/* Flash 訊息 */
+.flash-messages {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 300px;
+}
+
+.alert {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    body {
+        padding-top: 66px;
+    }
+    
+    .contact-form-card,
+    .contact-info {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-form-card,
+    .contact-info {
+        padding: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* 電腦版優化 */
+@media (min-width: 992px) {
+    .contact-info {
+        position: sticky;
+        top: 100px;
+    }
+}
+
+/* 表單驗證樣式 */
+.form-control:invalid {
+    border-color: #dc3545;
+}
+
+.form-control:valid {
+    border-color: #198754;
+}
